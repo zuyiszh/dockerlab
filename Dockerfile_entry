@@ -1,0 +1,21 @@
+FROM centos:7
+
+LABEL maintainer="Qin Ke<collinsctk@qytang.com>"
+LABEL version="1.0"
+LABEL description="QYT First DockerFile"
+
+RUN yum -y update && yum -y install vim net-tools
+
+WORKDIR /qytang
+
+ADD for_add /qytang
+COPY for_cp /qytang
+ADD for_add.tar.gz /qytang/unzip/
+
+ENV IF_NAME=eth0 SSH_PORT=22
+
+VOLUME /qytang
+
+EXPOSE $SSH_PORT
+
+ENTRYPOINT [ "ifconfig" ]
