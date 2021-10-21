@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}
+    乾頤堂Docker
+{% endblock title %}
+
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/jquery.dataTables.min.css"%}">
+{% endblock head %}
+
+{% block js %}
+    {% load static %}
+    <script src="{% static "/js/jquery.dataTables.min.js" %}"></script>
+{% endblock js %}
+
+{% block body %}
+    <div class="container">
+        <br><h2 style="color: #666666">课程信息查询</h2>
+        {# 创建显示学员信息的Table,注意id="mytable", 后续DataTable JavaScript就对这个ID的Table进行渲染优化 #}
+        <table class="table table-bordered" id="mytable">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">部门</th>
+                    <th scope="col">课程</th>
+                    <th scope="col">描述</th>
+                </tr>
+            </thead>
+            <tbody id="mytable-tbody">
+                {% for course in courses_list %}
+                    <tr>
+                        <td>{{ course.department }}</td>
+                        <td>{{ course.course_name }}</td>
+                        <td>{{ course.description }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock body %}

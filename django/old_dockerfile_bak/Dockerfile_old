@@ -1,0 +1,15 @@
+FROM centos:8
+RUN yum -y update && yum -y install gcc python3-devel && yum -y install python3
+LABEL maintainer="Qin Ke<collinsctk@qytang.com>"
+COPY requirement.txt /requirement/
+WORKDIR /requirement
+RUN pip3 install -i https://pypi.douban.com/simple/ -r requirement.txt
+
+VOLUME /djg
+WORKDIR /djg/
+
+ENV RUN_PORT=8000
+
+EXPOSE $RUN_PORT
+
+CMD python3 $(find . -name manage.py) runserver 0.0.0.0:$RUN_PORT
